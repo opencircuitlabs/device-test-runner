@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "name": "Power rail acceptance",
+  "variables": { "targetVoltage": 3.3 },
+  "setup": [{ "type": "command", "command": "supply.enable", "args": { "channel": 1 }, "expect": { "matcher": "equals", "value": true } }],
+  "tests": [
+    {
+      "name": "3V3 rail remains in tolerance",
+      "tags": ["smoke", "power"],
+      "steps": [
+        { "type": "command", "command": "meter.voltage", "args": { "channel": "3V3" }, "saveAs": "measuredVoltage", "timeoutMs": 1000, "retries": 1 },
+        { "type": "assert", "actual": "${measuredVoltage}", "expect": { "matcher": "approx", "value": "${targetVoltage}", "tolerance": 0.1 } },
+        { "type": "log", "message": "Measured ${measuredVoltage} V" }
+      ]
+    }
+  ],
+  "teardown": [{ "type": "command", "command": "supply.disable", "args": { "channel": 1 } }]
+}

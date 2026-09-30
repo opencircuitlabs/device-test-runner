@@ -1,0 +1,5 @@
+[
+  { "command": "supply.enable", "result": true },
+  { "command": "meter.voltage", "result": 3.31 },
+  { "command": "supply.disable", "result": true }
+]

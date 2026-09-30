@@ -1,0 +1,5 @@
+node_modules/
+coverage/
+results.json
+results.xml
+results.sarif
